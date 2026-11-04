@@ -1,0 +1,58 @@
+name: Ionic CRUD CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - master
+
+  pull_request:
+    branches:
+      - master
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    name: Build Ionic CRUD Application
+    runs-on: [self-hosted, Windows, X64]
+
+    steps:
+      # 1. Get the latest source code
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # 2. Set up Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+
+      # 3. Install project dependencies
+      - name: Install Dependencies
+        run: npm ci
+
+      # 4. Build Ionic Angular application
+      - name: Build Ionic Application
+        run: npm run build
+
+      # 5. Verify Docker installation
+      - name: Check Docker
+        run: docker version
+
+      # 6. Build Docker image
+      - name: Build Docker Image
+        run: |
+          docker build -t user-crud:${{ github.sha }} .
+
+      # 7. Verify Docker image
+      - name: Verify Docker Image
+        run: |
+          docker images user-crud
+
+      # 8. Display successful completion
+      - name: Pipeline Completed
+        run: echo "Ionic CRUD CI/CD Pipeline completed successfully!"
