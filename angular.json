@@ -47,8 +47,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "8kb",
+                  "maximumError": "10kb"
                 }
               ],
               "fileReplacements": [
@@ -108,19 +108,15 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "src/**/*.ts",
-              "src/**/*.html"
-            ]
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
           }
         }
       }
     }
   },
   "cli": {
-    "schematicCollections": [
-      "@ionic/angular-toolkit"
-    ]
+    "schematicCollections": ["@ionic/angular-toolkit"],
+    "analytics": "b7072708-954f-4693-8254-7b783a813187"
   },
   "schematics": {
     "@ionic/angular-toolkit:component": {
