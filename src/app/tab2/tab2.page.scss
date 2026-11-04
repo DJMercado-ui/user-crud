@@ -1,0 +1,972 @@
+/* =========================
+   PAGE
+========================= */
+
+ion-content {
+  --background: #3bde22;
+}
+
+ion-toolbar {
+  --background: #ffffff;
+  --color: #171923;
+  --border-width: 0;
+
+  border-bottom: 1px solid #e9ecf2;
+}
+
+ion-title {
+  font-size: 20px;
+  font-weight: 800;
+}
+
+/* =========================
+   LOADING
+========================= */
+
+.loading-container {
+  position: absolute;
+
+  inset: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  z-index: 10;
+
+  background: #f5f7fb;
+}
+
+.loading-container ion-spinner {
+  width: 42px;
+  height: 42px;
+
+  margin-bottom: 14px;
+
+  --color: #4f46e5;
+}
+
+.loading-container p {
+  margin: 0;
+
+  color: #6b7280;
+
+  font-size: 14px;
+
+  font-weight: 600;
+}
+
+/* =========================
+   MAIN CONTAINER
+========================= */
+
+.page-container {
+  width: 100%;
+
+  max-width: 1500px;
+
+  margin: 0 auto;
+
+  padding: 28px 58px 45px;
+
+  box-sizing: border-box;
+}
+
+/* =========================
+   PAGE HEADER
+========================= */
+
+.page-header {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-bottom: 20px;
+}
+
+.header-text {
+  min-width: 0;
+}
+
+.page-header h1 {
+  margin: 0 0 5px;
+
+  color: #171923;
+
+  font-size: 28px;
+
+  font-weight: 900;
+
+  letter-spacing: -0.6px;
+}
+
+.page-header p {
+  margin: 0;
+
+  color: #737b8c;
+
+  font-size: 14px;
+}
+
+/* =========================
+   PRODUCT COUNT
+========================= */
+
+.product-count {
+  min-width: 96px;
+
+  padding: 12px 16px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  background: #ffffff;
+
+  border: 1px solid #e9ecf2;
+
+  border-radius: 15px;
+
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+
+  flex-shrink: 0;
+}
+
+.product-count span {
+  color: #4f46e5;
+
+  font-size: 12px;
+
+  font-weight: 800;
+}
+
+.product-count small {
+  margin-top: 2px;
+
+  color: #171923;
+
+  font-size: 14px;
+
+  font-weight: 800;
+}
+
+/* =========================
+   SEARCH
+========================= */
+
+.search-container {
+  width: 100%;
+
+  margin-bottom: 12px;
+}
+
+.product-search {
+  --background: #ffffff;
+
+  --border-radius: 15px;
+
+  --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+
+  --color: #252936;
+
+  --placeholder-color: #a0a5b0;
+
+  --icon-color: #4f46e5;
+
+  padding: 0;
+}
+
+/* =========================
+   CATEGORY FILTER
+========================= */
+
+.category-filter-container {
+  width: 100%;
+
+  margin-bottom: 22px;
+
+  background: #ffffff;
+
+  border: 1px solid #e9ecf2;
+
+  border-radius: 15px;
+
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+
+  overflow: hidden;
+}
+
+.category-filter {
+  --background: #ffffff;
+
+  min-height: 54px;
+
+  padding: 5px;
+}
+
+.category-filter ion-segment-button {
+  min-height: 44px;
+
+  --color: #737b8c;
+
+  --color-checked: #ffffff;
+
+  --indicator-color: #4f46e5;
+
+  font-size: 12px;
+
+  font-weight: 800;
+
+  text-transform: none;
+
+  border-radius: 11px;
+}
+
+.category-filter ion-label {
+  white-space: nowrap;
+}
+
+/* =========================
+   PRODUCT LIST
+========================= */
+
+.product-list {
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 18px;
+}
+
+/* =========================
+   PRODUCT CARD WRAPPER
+========================= */
+
+.product-card-wrapper {
+  position: relative;
+
+  min-width: 0;
+
+  overflow: hidden;
+
+  border-radius: 20px;
+
+  isolation: isolate;
+}
+
+/* =========================
+   SWIPE DELETE AREA
+========================= */
+
+.swipe-action {
+  position: absolute;
+
+  top: 0;
+  right: 0;
+  bottom: 0;
+
+  width: 110px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  background: #fee2e2;
+
+  border-radius: 20px;
+
+  opacity: 1;
+
+  pointer-events: none;
+
+  z-index: 0;
+}
+
+/* =========================
+   SWIPE DELETE BUTTON
+========================= */
+
+.swipe-delete-button {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 5px;
+
+  padding: 0;
+
+  border: none;
+
+  background: transparent;
+
+  color: #dc2626;
+
+  font-family: inherit;
+
+  font-size: 11px;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  pointer-events: auto;
+}
+
+.swipe-delete-button ion-icon {
+  font-size: 23px;
+
+  color: #dc2626;
+}
+
+.swipe-delete-button:hover {
+  background: #fecaca;
+}
+
+.swipe-delete-button:active {
+  background: #fca5a5;
+}
+
+/* =========================
+   PRODUCT CARD
+========================= */
+
+.product-card {
+  position: relative;
+
+  z-index: 1;
+
+  width: 100%;
+
+  min-height: 106px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  padding: 16px;
+
+  box-sizing: border-box;
+
+  background: #ffffff;
+
+  border: 1px solid #e9ecf2;
+
+  border-radius: 20px;
+
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.045);
+
+  cursor: grab;
+
+  touch-action: pan-y;
+
+  user-select: none;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.2s ease;
+}
+
+.product-card:active {
+  cursor: grabbing;
+}
+
+.product-card:hover {
+  box-shadow: 0 9px 25px rgba(0, 0, 0, 0.075);
+}
+
+/* =========================
+   SWIPED CARD
+========================= */
+
+.product-card.swiped {
+  transform: translateX(-110px);
+
+  border-radius: 20px 0 0 20px;
+
+  box-shadow: -5px 5px 18px rgba(0, 0, 0, 0.04);
+}
+
+/* =========================
+   PRODUCT ICON
+========================= */
+
+.product-icon {
+  flex-shrink: 0;
+
+  width: 70px;
+  height: 70px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 16px;
+
+  background: #eef2ff;
+
+  font-size: 30px;
+
+  box-shadow: inset 0 0 0 1px rgba(79, 70, 229, 0.04);
+}
+
+/* =========================
+   PRODUCT INFO
+========================= */
+
+.product-info {
+  flex: 1;
+
+  min-width: 0;
+
+  overflow: hidden;
+}
+
+/* =========================
+   PRODUCT TITLE
+========================= */
+
+.product-title-row {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  margin-bottom: 10px;
+
+  min-width: 0;
+}
+
+.product-title-row h2 {
+  min-width: 0;
+
+  flex: 1;
+
+  margin: 0;
+
+  overflow: hidden;
+
+  color: #171923;
+
+  font-size: 18px;
+
+  font-weight: 800;
+
+  white-space: nowrap;
+
+  text-overflow: ellipsis;
+}
+
+/* =========================
+   CATEGORY BADGE
+========================= */
+
+.category {
+  flex-shrink: 0;
+
+  max-width: 120px;
+
+  overflow: hidden;
+
+  padding: 5px 8px;
+
+  border-radius: 8px;
+
+  background: #eef2ff;
+
+  color: #4f46e5;
+
+  font-size: 9px;
+
+  font-weight: 800;
+
+  white-space: nowrap;
+
+  text-overflow: ellipsis;
+}
+
+/* =========================
+   PRODUCT META
+========================= */
+
+.product-meta {
+  display: flex;
+
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+}
+
+/* =========================
+   PRICE
+========================= */
+
+.product-price {
+  padding: 7px 10px;
+
+  border-radius: 9px;
+
+  background: #f8f9fc;
+
+  color: #171923;
+
+  font-size: 15px;
+
+  font-weight: 900;
+}
+
+.product-price::before {
+  content: none;
+}
+
+/* =========================
+   QUANTITY
+========================= */
+
+.product-quantity {
+  padding: 7px 10px;
+
+  border-radius: 9px;
+
+  background: #f8f9fc;
+
+  color: #4b5563;
+
+  font-size: 12px;
+
+  font-weight: 700;
+}
+
+.product-quantity.low-stock {
+  background: #fff7ed;
+
+  color: #a16207;
+}
+
+.product-quantity.out-of-stock {
+  background: #fee2e2;
+
+  color: #dc2626;
+}
+
+/* =========================
+   ACTIONS
+========================= */
+
+.actions {
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+}
+
+/* =========================
+   EDIT BUTTON
+========================= */
+
+.actions ion-button {
+  width: 42px;
+  height: 44px;
+
+  margin: 0;
+
+  --border-radius: 11px;
+
+  --padding-start: 0;
+  --padding-end: 0;
+
+  --background: #eef2ff;
+
+  --color: #4f46e5;
+}
+
+.actions ion-button:hover {
+  --background: #e0e7ff;
+}
+
+/* =========================
+   SWIPE HINT
+========================= */
+
+.swipe-hint {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 28px;
+  height: 42px;
+
+  color: #b5bac5;
+
+  font-size: 16px;
+
+  font-weight: 700;
+
+  opacity: 0.8;
+
+  pointer-events: none;
+}
+
+/* =========================
+   EMPTY STATE
+========================= */
+
+.empty-state {
+  min-height: 320px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  padding: 40px 20px;
+}
+
+.empty-icon {
+  width: 75px;
+  height: 75px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 16px;
+
+  border-radius: 20px;
+
+  background: #eef2ff;
+
+  font-size: 34px;
+}
+
+.empty-state h2 {
+  margin: 0 0 8px;
+
+  color: #252936;
+
+  font-size: 20px;
+
+  font-weight: 800;
+}
+
+.empty-state p {
+  max-width: 360px;
+
+  margin: 0;
+
+  color: #858b98;
+
+  font-size: 13px;
+
+  line-height: 1.6;
+}
+
+/* =========================
+   EDIT MODAL
+========================= */
+
+ion-modal {
+  --width: 500px;
+
+  --max-width: calc(100% - 30px);
+
+  --height: auto;
+
+  --max-height: 90%;
+
+  --border-radius: 22px;
+}
+
+ion-modal ion-toolbar {
+  --background: #ffffff;
+
+  border-bottom: 1px solid #e9ecf2;
+}
+
+ion-modal ion-title {
+  font-size: 18px;
+}
+
+.edit-form {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 12px;
+}
+
+.edit-form ion-item {
+  --background: #f8f9fc;
+
+  --border-color: #e9ecf2;
+
+  --border-radius: 12px;
+
+  --padding-start: 14px;
+
+  --inner-padding-end: 14px;
+}
+
+.edit-form ion-input {
+  --color: #252936;
+
+  --placeholder-color: #9ca3af;
+}
+
+/* =========================
+   SAVE BUTTON
+========================= */
+
+.save-button {
+  margin-top: 10px;
+
+  --background: #4f46e5;
+
+  --background-hover: #4338ca;
+
+  --border-radius: 12px;
+
+  height: 48px;
+
+  font-weight: 800;
+}
+
+.save-button ion-spinner {
+  width: 20px;
+  height: 20px;
+
+  margin-right: 8px;
+}
+
+/* =========================
+   DESKTOP
+========================= */
+
+@media (min-width: 1100px) {
+  .product-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 900px) {
+  .page-container {
+    padding: 24px 30px 40px;
+  }
+
+  .product-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+  .page-container {
+    padding: 20px 14px 30px;
+  }
+
+  .page-header {
+    align-items: flex-start;
+  }
+
+  .page-header h1 {
+    font-size: 24px;
+  }
+
+  .page-header p {
+    font-size: 13px;
+  }
+
+  .product-count {
+    min-width: 75px;
+
+    padding: 9px 10px;
+  }
+
+  .product-count small {
+    font-size: 12px;
+  }
+
+  .product-list {
+    grid-template-columns: 1fr;
+
+    gap: 12px;
+  }
+
+  .product-card {
+    min-height: 95px;
+
+    padding: 12px;
+
+    gap: 10px;
+
+    border-radius: 17px;
+  }
+
+  .product-card.swiped {
+    transform: translateX(-100px);
+
+    border-radius: 17px 0 0 17px;
+  }
+
+  .swipe-action {
+    width: 100px;
+
+    border-radius: 17px;
+  }
+
+  .product-icon {
+    width: 58px;
+    height: 58px;
+
+    border-radius: 14px;
+
+    font-size: 25px;
+  }
+
+  .product-title-row {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+    margin-bottom: 7px;
+  }
+
+  .product-title-row h2 {
+    font-size: 16px;
+  }
+
+  .category {
+    max-width: 100px;
+
+    font-size: 8px;
+  }
+
+  .product-price {
+    font-size: 13px;
+
+    padding: 6px 8px;
+  }
+
+  .product-quantity {
+    font-size: 10px;
+
+    padding: 6px 8px;
+  }
+
+  .actions {
+    gap: 3px;
+  }
+
+  .actions ion-button {
+    width: 36px;
+
+    height: 40px;
+  }
+
+  .swipe-hint {
+    width: 20px;
+
+    font-size: 14px;
+  }
+
+  .swipe-delete-button {
+    font-size: 10px;
+  }
+
+  .swipe-delete-button ion-icon {
+    font-size: 21px;
+  }
+}
+
+/* =========================
+   SMALL PHONES
+========================= */
+
+@media (max-width: 420px) {
+  .page-header h1 {
+    font-size: 22px;
+  }
+
+  .product-count {
+    min-width: 68px;
+  }
+
+  .product-icon {
+    width: 52px;
+    height: 52px;
+
+    font-size: 23px;
+  }
+
+  .product-card {
+    padding: 10px;
+  }
+
+  .product-card.swiped {
+    transform: translateX(-92px);
+  }
+
+  .swipe-action {
+    width: 92px;
+  }
+
+  .product-title-row h2 {
+    font-size: 15px;
+  }
+
+  .product-meta {
+    gap: 5px;
+  }
+
+  .actions ion-button {
+    width: 32px;
+
+    height: 38px;
+  }
+
+  .swipe-hint {
+    display: none;
+  }
+}

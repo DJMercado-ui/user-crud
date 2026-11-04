@@ -1,1 +1,174 @@
+:host {
+  display: block;
+  height: 100%;
+}
 
+ion-router-outlet {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 70px;
+}
+
+.custom-tab-bar {
+  position: fixed;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  height: 70px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  background: #ffffff;
+
+  border-top: 1px solid #e5e7eb;
+
+  box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.08);
+
+  z-index: 99999;
+}
+
+.tab-button {
+  flex: 1;
+
+  height: 70px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-decoration: none;
+
+  color: #6b7280;
+
+  transition: all 0.2s ease;
+}
+
+.tab-button:hover {
+  color: #2563eb;
+  background: #f8fafc;
+}
+
+.tab-icon {
+  font-size: 22px;
+  line-height: 1;
+  margin-bottom: 5px;
+}
+
+.tab-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+/* =========================
+   CUSTOM TAB BAR
+========================= */
+
+.custom-tab-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  height: 75px;
+
+  background: #ffffff;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  border-top: 1px solid #e5e7eb;
+
+  z-index: 9999;
+}
+
+/* =========================
+   TAB BUTTON
+========================= */
+
+.tab-button {
+  flex: 1;
+
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  text-decoration: none;
+
+  color: #6b7280;
+
+  transition: all 0.2s ease;
+}
+
+/* =========================
+   ICON
+========================= */
+
+.tab-icon {
+  font-size: 24px;
+  line-height: 1;
+
+  margin-bottom: 5px;
+
+  transition: all 0.2s ease;
+}
+
+/* =========================
+   LABEL
+========================= */
+
+.tab-label {
+  font-size: 11px;
+  font-weight: 600;
+
+  transition: all 0.2s ease;
+}
+
+/* =========================
+   ACTIVE TAB
+========================= */
+
+.tab-button.active {
+  color: #4652c3;
+}
+
+/* Active icon */
+
+.tab-button.active .tab-icon {
+  transform: translateY(-2px);
+}
+
+/* Active label */
+
+.tab-button.active .tab-label {
+  font-weight: 700;
+}
+
+/* =========================
+   ACTIVE INDICATOR
+========================= */
+
+.tab-button.active::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+
+  width: 55px;
+  height: 3px;
+
+  background: #4652c3;
+
+  border-radius: 0 0 5px 5px;
+}

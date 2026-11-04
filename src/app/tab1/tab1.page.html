@@ -1,17 +1,260 @@
-<ion-header [translucent]="true">
+<ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
+    <ion-title> Add Product </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <!-- =========================================
+       LOADING OVERLAY
+  ========================================== -->
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <div class="loading-overlay" *ngIf="isLoading">
+    <div class="loading-card">
+      <div class="spinner"></div>
+
+      <h2>Adding Product</h2>
+
+      <p>Please wait while we save your product...</p>
+    </div>
+  </div>
+
+  <!-- =========================================
+       SUCCESS / ERROR MESSAGE
+  ========================================== -->
+
+  <div
+    class="message-container"
+    *ngIf="showMessage"
+    [class.success]="messageType === 'success'"
+    [class.error]="messageType === 'error'"
+    [class.warning]="messageType === 'warning'"
+  >
+    <div class="message-icon">
+      <span *ngIf="messageType === 'success'"> ✓ </span>
+
+      <span *ngIf="messageType === 'error'"> ! </span>
+
+      <span *ngIf="messageType === 'warning'"> ! </span>
+    </div>
+
+    <div class="message-content">
+      <strong *ngIf="messageType === 'success'"> Success </strong>
+
+      <strong *ngIf="messageType === 'error'"> Error </strong>
+
+      <strong *ngIf="messageType === 'warning'"> Warning </strong>
+
+      <p>{{ messageText }}</p>
+    </div>
+
+    <button type="button" class="message-close" (click)="closeMessage()">
+      ×
+    </button>
+  </div>
+
+  <!-- =========================================
+       MAIN CONTENT
+  ========================================== -->
+
+  <div class="product-container">
+    <!-- PAGE HEADER -->
+
+    <div class="page-header">
+      <div class="page-icon">📦</div>
+
+      <div>
+        <h1>Add a Product</h1>
+
+        <p>Add a new product to your inventory</p>
+      </div>
+    </div>
+
+    <!-- =========================================
+         FORM CARD
+    ========================================== -->
+
+    <div class="form-card">
+      <!-- CARD HEADER -->
+
+      <div class="card-header">
+        <h2>Product Information</h2>
+
+        <p>Enter the details of your product below.</p>
+      </div>
+
+      <div class="product-form">
+        <!-- =====================================
+             PRODUCT NAME
+        ====================================== -->
+
+        <div class="form-group">
+          <label>
+            Product Name
+
+            <span class="required"> * </span>
+          </label>
+
+          <div class="input-wrapper">
+            <span class="field-icon"> 📦 </span>
+
+            <input
+              type="text"
+              [(ngModel)]="newProduct.name"
+              placeholder="Enter product name"
+            />
+          </div>
+        </div>
+
+        <!-- =====================================
+             CATEGORY
+        ====================================== -->
+
+        <div class="form-group">
+          <label>
+            Category
+
+            <span class="required"> * </span>
+          </label>
+
+          <div class="input-wrapper select-wrapper">
+            <span class="field-icon"> 🏷️ </span>
+
+            <select [(ngModel)]="newProduct.category">
+              <option value="" disabled>Select a category</option>
+
+              <option value="Smartphone">Smartphone</option>
+
+              <option value="Laptop">Laptop</option>
+
+              <option value="Tablet">Tablet</option>
+
+              <option value="Computer">Computer</option>
+
+              <option value="Accessories">Accessories</option>
+
+              <option value="Gaming">Gaming</option>
+
+              <option value="Audio">Audio</option>
+
+              <option value="Other">Other</option>
+            </select>
+
+            <span class="select-arrow"> ▼ </span>
+          </div>
+        </div>
+
+        <!-- =====================================
+             PRICE + QUANTITY
+        ====================================== -->
+
+        <div class="form-row">
+          <!-- PRICE -->
+
+          <div class="form-group">
+            <label>
+              Price
+
+              <span class="required"> * </span>
+            </label>
+
+            <div class="input-wrapper">
+              <span class="currency"> ₱ </span>
+
+              <input
+                type="number"
+                [(ngModel)]="newProduct.price"
+                min="0"
+                step="0.01"
+                placeholder="0.00"
+              />
+            </div>
+          </div>
+
+          <!-- QUANTITY -->
+
+          <div class="form-group">
+            <label>
+              Quantity
+
+              <span class="required"> * </span>
+            </label>
+
+            <div class="quantity-wrapper">
+              <button
+                type="button"
+                class="quantity-btn"
+                [disabled]="newProduct.quantity <= 0"
+                (click)="newProduct.quantity = newProduct.quantity - 1"
+              >
+                −
+              </button>
+
+              <input
+                type="number"
+                [(ngModel)]="newProduct.quantity"
+                min="0"
+                step="1"
+              />
+
+              <button
+                type="button"
+                class="quantity-btn"
+                (click)="newProduct.quantity = newProduct.quantity + 1"
+              >
+                +
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- =====================================
+             INFORMATION
+        ====================================== -->
+
+        <div class="info-box">
+          <span> ℹ️ </span>
+
+          <p>
+            Make sure all product information is correct before adding it to
+            your inventory.
+          </p>
+        </div>
+
+        <!-- =====================================
+             ADD PRODUCT
+        ====================================== -->
+
+        <button
+          type="button"
+          class="add-product-button"
+          [disabled]="isLoading"
+          (click)="addProduct()"
+        >
+          <span *ngIf="!isLoading"> ➕&nbsp; Add Product </span>
+
+          <span *ngIf="isLoading"> ⏳&nbsp; Adding Product... </span>
+        </button>
+
+        <!-- =====================================
+             CLEAR FORM
+        ====================================== -->
+
+        <button
+          type="button"
+          class="clear-button"
+          [disabled]="isLoading"
+          (click)="resetForm()"
+        >
+          ↻&nbsp; Clear Form
+        </button>
+
+        <p class="required-note">
+          <span> * </span>
+
+          Required fields
+        </p>
+      </div>
+    </div>
+  </div>
 </ion-content>

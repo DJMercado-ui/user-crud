@@ -1,17 +1,380 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
+    <ion-title> My Products </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <!-- =========================================
+       PULL TO REFRESH
+  ========================================== -->
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <ion-refresher slot="fixed" (ionRefresh)="refreshProducts($event)">
+    <ion-refresher-content> </ion-refresher-content>
+  </ion-refresher>
+
+  <!-- =========================================
+       LOADING
+  ========================================== -->
+
+  <div class="loading-container" *ngIf="isLoading && products.length === 0">
+    <ion-spinner name="crescent"> </ion-spinner>
+
+    <p>Loading products...</p>
+  </div>
+
+  <!-- =========================================
+       MAIN CONTENT
+  ========================================== -->
+
+  <div class="page-container" *ngIf="!isLoading || products.length > 0">
+    <!-- =======================================
+         PAGE HEADER
+    ======================================== -->
+
+    <div class="page-header">
+      <div class="header-text">
+        <h1>Product Inventory</h1>
+
+        <p>Manage your products</p>
+      </div>
+
+      <!-- PRODUCT COUNT -->
+
+      <div class="product-count">
+        <span> {{ filteredProducts.length }} </span>
+
+        <small> Products </small>
+      </div>
+    </div>
+
+    <!-- =======================================
+         SEARCH
+    ======================================== -->
+
+    <div class="search-container">
+      <ion-searchbar
+        class="product-search"
+        placeholder="Search products, category, price..."
+        [(ngModel)]="searchTerm"
+        (ionInput)="searchProducts($event)"
+        animated="true"
+      >
+      </ion-searchbar>
+    </div>
+
+    <!-- =======================================
+         CATEGORY FILTERS
+    ======================================== -->
+
+    <div class="category-filter-container">
+      <ion-segment
+        class="category-filter"
+        [value]="selectedCategory"
+        (ionChange)="filterByCategory($event)"
+        scrollable="true"
+      >
+        <!-- ALL -->
+
+        <ion-segment-button value="ALL">
+          <ion-label> All </ion-label>
+        </ion-segment-button>
+
+        <!-- DYNAMIC CATEGORIES -->
+
+        <ion-segment-button
+          *ngFor="let category of categories"
+          [value]="category"
+        >
+          <ion-label> {{ category }} </ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+
+    <!-- =======================================
+         PRODUCT LIST
+    ======================================== -->
+
+    <div class="product-list" *ngIf="filteredProducts.length > 0">
+      <div
+        class="product-card-wrapper"
+        *ngFor="let product of filteredProducts"
+      >
+        <!-- ===================================
+             SWIPE DELETE ACTION
+        ==================================== -->
+
+        <div
+          class="swipe-action"
+          [class.visible]="
+            swipedProductId === product.id
+          "
+        >
+          <button
+            type="button"
+            class="swipe-delete-button"
+            (click)="deleteProduct(product)"
+          >
+            <ion-icon name="trash-outline"> </ion-icon>
+
+            <span> Delete </span>
+          </button>
+        </div>
+
+        <!-- ===================================
+             PRODUCT CARD
+        ==================================== -->
+
+        <div
+          class="product-card"
+          [class.swiped]="
+            swipedProductId === product.id
+          "
+          (pointerdown)="
+            startSwipe($event, product)
+          "
+          (pointermove)="
+            moveSwipe($event, product)
+          "
+          (pointerup)="
+            endSwipe($event, product)
+          "
+          (pointercancel)="
+            endSwipe($event, product)
+          "
+        >
+          <!-- PRODUCT ICON -->
+
+          <div class="product-icon">📦</div>
+
+          <!-- =================================
+               PRODUCT INFORMATION
+          ================================== -->
+
+          <div class="product-info">
+            <!-- NAME + CATEGORY -->
+
+            <div class="product-title-row">
+              <h2>{{ product.name }}</h2>
+
+              <span class="category"> {{ product.category }} </span>
+            </div>
+
+            <!-- =================================
+                 PRODUCT META
+            ================================== -->
+
+            <div class="product-meta">
+              <!-- PRICE -->
+
+              <span class="product-price">
+                ₱{{ product.price | number:'1.2-2' }}
+              </span>
+
+              <!-- QUANTITY -->
+
+              <span
+                class="product-quantity"
+                [class.low-stock]="
+                  product.quantity > 0 &&
+                  product.quantity <= 5
+                "
+                [class.out-of-stock]="
+                  product.quantity === 0
+                "
+              >
+                <!-- IN STOCK -->
+
+                <ng-container *ngIf="product.quantity > 0">
+                  {{ product.quantity }} in stock
+                </ng-container>
+
+                <!-- OUT OF STOCK -->
+
+                <ng-container *ngIf="product.quantity === 0">
+                  Out of stock
+                </ng-container>
+              </span>
+            </div>
+          </div>
+
+          <!-- =================================
+               ACTIONS
+          ================================== -->
+
+          <div class="actions">
+            <!-- EDIT -->
+
+            <ion-button
+              class="edit-button"
+              fill="clear"
+              (click)="openEditModal(product)"
+            >
+              <ion-icon name="create-outline" slot="icon-only"> </ion-icon>
+            </ion-button>
+
+            <!-- SWIPE INDICATOR -->
+
+            <span class="swipe-hint"> ← </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =======================================
+         EMPTY STATE
+    ======================================== -->
+
+    <div
+      class="empty-state"
+      *ngIf="
+        !isLoading &&
+        filteredProducts.length === 0
+      "
+    >
+      <div class="empty-icon">📦</div>
+
+      <h2>No Products Found</h2>
+
+      <!-- FILTERED EMPTY STATE -->
+
+      <p
+        *ngIf="
+          searchTerm ||
+          selectedCategory !== 'ALL'
+        "
+      >
+        Try changing your search or category filter.
+      </p>
+
+      <!-- NO PRODUCTS AT ALL -->
+
+      <p
+        *ngIf="
+          !searchTerm &&
+          selectedCategory === 'ALL'
+        "
+      >
+        Add your first product from the Add Product tab.
+      </p>
+    </div>
+  </div>
+
+  <!-- =========================================
+       EDIT PRODUCT MODAL
+  ========================================== -->
+
+  <ion-modal [isOpen]="isEditModalOpen" (didDismiss)="closeEditModal()">
+    <ng-template>
+      <!-- MODAL HEADER -->
+
+      <ion-header>
+        <ion-toolbar>
+          <ion-title> Update Product </ion-title>
+
+          <ion-buttons slot="end">
+            <ion-button (click)="closeEditModal()">
+              <ion-icon name="close-outline" slot="icon-only"> </ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <!-- MODAL CONTENT -->
+
+      <ion-content class="ion-padding">
+        <div class="edit-form">
+          <!-- =================================
+               PRODUCT NAME
+          ================================== -->
+
+          <ion-item>
+            <ion-input
+              label="Product Name"
+              labelPlacement="stacked"
+              placeholder="Enter product name"
+              [(ngModel)]="editingProduct.name"
+            >
+            </ion-input>
+          </ion-item>
+
+          <!-- =================================
+               CATEGORY
+          ================================== -->
+
+          <ion-item>
+            <ion-input
+              label="Category"
+              labelPlacement="stacked"
+              placeholder="Enter category"
+              [(ngModel)]="editingProduct.category"
+            >
+            </ion-input>
+          </ion-item>
+
+          <!-- =================================
+               PRICE
+          ================================== -->
+
+          <ion-item>
+            <ion-input
+              label="Price"
+              labelPlacement="stacked"
+              type="number"
+              min="0"
+              step="0.01"
+              placeholder="0.00"
+              [(ngModel)]="editingProduct.price"
+            >
+            </ion-input>
+          </ion-item>
+
+          <!-- =================================
+               QUANTITY
+          ================================== -->
+
+          <ion-item>
+            <ion-input
+              label="Quantity"
+              labelPlacement="stacked"
+              type="number"
+              min="0"
+              step="1"
+              placeholder="0"
+              [(ngModel)]="editingProduct.quantity"
+            >
+            </ion-input>
+          </ion-item>
+
+          <!-- =================================
+               UPDATE BUTTON
+          ================================== -->
+
+          <ion-button
+            expand="block"
+            class="save-button"
+            (click)="saveProduct()"
+            [disabled]="isLoading"
+          >
+            <ion-spinner *ngIf="isLoading" name="crescent"> </ion-spinner>
+
+            <span *ngIf="!isLoading"> Update Product </span>
+          </ion-button>
+
+          <!-- =================================
+               CANCEL BUTTON
+          ================================== -->
+
+          <ion-button
+            expand="block"
+            fill="outline"
+            (click)="closeEditModal()"
+            [disabled]="isLoading"
+          >
+            Cancel
+          </ion-button>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>

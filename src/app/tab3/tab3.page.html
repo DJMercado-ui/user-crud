@@ -1,17 +1,227 @@
-<ion-header [translucent]="true">
+<ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
+    <ion-title>About</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <div class="about-container">
+    <!-- =========================
+         HERO
+    ========================= -->
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+    <section class="hero-card">
+      <div class="hero-icon">📦</div>
+
+      <h1>Product Inventory</h1>
+
+      <p>
+        Your personal space to organize, manage, and keep track of your products
+        and inventory.
+      </p>
+    </section>
+
+    <!-- =========================
+         ABOUT THE APP
+    ========================= -->
+
+    <section class="info-card">
+      <div class="section-icon">🛍️</div>
+
+      <div class="section-content">
+        <h2>About the App</h2>
+
+        <p>
+          Product Inventory is a simple inventory management application
+          designed to help users keep track of their products, categories,
+          prices, and available stock.
+        </p>
+      </div>
+    </section>
+
+    <!-- =========================
+         FEATURES
+    ========================= -->
+
+    <section class="info-card">
+      <div class="section-icon">✨</div>
+
+      <div class="section-content">
+        <h2>Features</h2>
+
+        <div class="feature-list">
+          <!-- Add Products -->
+          <div class="feature">
+            <span> ➕ </span>
+
+            <div>
+              <strong> Add Products </strong>
+
+              <p>Add new products to your inventory.</p>
+            </div>
+          </div>
+
+          <!-- Search Products -->
+          <div class="feature">
+            <span> 🔍 </span>
+
+            <div>
+              <strong> Search Products </strong>
+
+              <p>Quickly find products using the search bar.</p>
+            </div>
+          </div>
+
+          <!-- Filter Products -->
+          <div class="feature">
+            <span> 🎯 </span>
+
+            <div>
+              <strong> Filter by Category </strong>
+
+              <p>Organize products based on their category.</p>
+            </div>
+          </div>
+
+          <!-- Edit Products -->
+          <div class="feature">
+            <span> ✏️ </span>
+
+            <div>
+              <strong> Edit Products </strong>
+
+              <p>Update product information whenever needed.</p>
+            </div>
+          </div>
+
+          <!-- Delete Products -->
+          <div class="feature">
+            <span> 🗑️ </span>
+
+            <div>
+              <strong> Delete Products </strong>
+
+              <p>Remove products from your inventory.</p>
+            </div>
+          </div>
+
+          <!-- Cloud Storage -->
+          <div class="feature">
+            <span> ☁️ </span>
+
+            <div>
+              <strong> Cloud Storage </strong>
+
+              <p>Product data is stored using Firebase Firestore.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================
+         PRODUCT DATA
+    ========================= -->
+
+    <section class="info-card">
+      <div class="section-icon">📋</div>
+
+      <div class="section-content">
+        <h2>Product Information</h2>
+
+        <p>
+          Each product contains important information that makes it easier to
+          manage and monitor your inventory.
+        </p>
+
+        <div class="data-grid">
+          <!-- Product Name -->
+          <div class="data-item">
+            <strong> Name </strong>
+
+            <span> Product name </span>
+          </div>
+
+          <!-- Category -->
+          <div class="data-item">
+            <strong> Category </strong>
+
+            <span> Product category </span>
+          </div>
+
+          <!-- Price -->
+          <div class="data-item">
+            <strong> Price </strong>
+
+            <span> Product price </span>
+          </div>
+
+          <!-- Quantity -->
+          <div class="data-item">
+            <strong> Quantity </strong>
+
+            <span> Available stock </span>
+          </div>
+
+          <!-- Stock Status -->
+          <div class="data-item">
+            <strong> Stock Status </strong>
+
+            <span> Current inventory level </span>
+          </div>
+
+          <!-- Category Filter -->
+          <div class="data-item">
+            <strong> Category Filter </strong>
+
+            <span> Filter products by category </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================
+         TECHNOLOGY
+    ========================= -->
+
+    <section class="technology-card">
+      <div class="tech-title">
+        <span> ⚙️ </span>
+
+        <h2>Built With</h2>
+      </div>
+
+      <div class="tech-tags">
+        <span> IONIC </span>
+
+        <span> ANGULAR </span>
+
+        <span> TYPESCRIPT </span>
+
+        <span> FIREBASE </span>
+
+        <span> FIRESTORE </span>
+      </div>
+    </section>
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <div class="footer">
+      <div class="footer-logo">📦</div>
+
+      <h3>Product Inventory</h3>
+
+      <p>A CRUD Activity using Ionic, Angular, and Firebase Firestore.</p>
+
+      <div class="student-name">
+        Activity by
+
+        <strong> Mercado, Dee Jhay H. Mercado </strong>
+      </div>
+
+      <small> BSIT IV - F2 </small>
+    </div>
+  </div>
 </ion-content>
